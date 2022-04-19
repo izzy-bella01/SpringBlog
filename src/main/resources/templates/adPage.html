@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ad Page</title>
+    </head>
+    <body>
+      <h1>Ad Page</h1>
+      <div th:each="ad : ${ads}">
+          <h4 th:text="${ad.title}"></h4>
+          <p th:text="${ad.description}"></p>
+      </div>
+    </body>
+</html>

@@ -1,4 +1,4 @@
-package com.codeup.springblog;
+package com.codeup.springblog.services;
 
 public class Post {
     private String title;
