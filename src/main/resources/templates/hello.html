@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Home</title>
+    <title>Hello</title>
   </head>
   <body>
-    <nav th:include="nav :: navbar"></nav>
+    <nav th:include="partials :: navbar"></nav>
     <h1>Hello <span th:text="${enteredName}"></span>!</h1>
 
   </body>

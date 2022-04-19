@@ -5,6 +5,9 @@
         <title>Navbar</title>
     </head>
     <body>
+        <header th:fragment="header">
+            <h1>This is the page header</h1>
+        </header>
         <nav th:fragment="navbar">
             <ul>
                 <li>home</li>
@@ -12,5 +15,12 @@
                 <li>contact</li>
             </ul>
         </nav>
+        <footer th:fragment="footer">
+            <ul>
+                <li>contact</li>
+                <li>learn more</li>
+                <li>&copy;</li>
+            </ul>
+        </footer>
     </body>
 </html>

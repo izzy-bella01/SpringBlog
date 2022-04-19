@@ -26,9 +26,4 @@ public class DiceRollController {
 
         return "diceRollGuess";
     }
-//
-//    public double getRandomNumber() {
-//        double x = (Math.random() * ((6 - 1) + 1)) + 1;
-//        return x;
-//    }
 }
