@@ -5,6 +5,13 @@
         <title>Index</title>
     </head>
     <body>
-        <div th:text="postArr"></div>
+<!--        <div th:each="post : ${postArr}">-->
+<!--            <h2 th:text="${post.title}"></h2>-->
+<!--            <p th:text="${post.body}"></p>-->
+<!--        </div>-->
+        <div th:each="post : ${posts}">
+            <h2 th:text="${post.title}"></h2>
+            <p th:text="${post.body}"></p>
+        </div>
     </body>
 </html>
