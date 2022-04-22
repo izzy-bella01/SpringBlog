@@ -61,14 +61,14 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String submitPost(@ModelAttribute Post title, @ModelAttribute Post body, Model model) {
-
-        model.addAttribute("title", title);
-        model.addAttribute("body", body);
-
-        postDao.save(title);
-        postDao.save(body);
-
+    public String submitPost(@ModelAttribute Post post) {
+        postDao.save(post);
         return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/{id}/edit")
+    public String editPost() {
+
+        return "posts/edit";
     }
 }
