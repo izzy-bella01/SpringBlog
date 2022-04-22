@@ -38,14 +38,23 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String individualPost(@PathVariable long id, Model model) {
+
+        User user = userDao.getById(1);
+
+        model.addAttribute("email", user.getEmail());
         model.addAttribute("postById", postDao.findById(id));
+
 
         return "posts/show";
     }
 
     @GetMapping("/posts/create")
     public String postCreateForm(Model model) {
+        User user = userDao.getById(1);
+
         Post newPost = new Post();
+        newPost.setUser(user);
+
         model.addAttribute("post", newPost);
 
         return "posts/create";
@@ -54,16 +63,9 @@ public class PostController {
     @PostMapping("/posts/create")
     public String submitPost(@ModelAttribute Post title, @ModelAttribute Post body, Model model) {
 
-        User user = userDao.getById(1);
-
-        Post post = new Post();
-        String username = post.getUser().getEmail();
-
         model.addAttribute("title", title);
         model.addAttribute("body", body);
-        model.addAttribute("username", username);
 
-        post.setUser(user);
         postDao.save(title);
         postDao.save(body);
 
