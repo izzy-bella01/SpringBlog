@@ -30,9 +30,6 @@ public class Post {
     public Post() {
     }
 
-    public Post(User user) {
-    }
-
     public Post(String title, String body, User user) {
         this.title = title;
         this.body = body;
