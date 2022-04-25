@@ -1,4 +1,4 @@
-package com.codeup.springblog.services;
+package com.codeup.springblog.models;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,14 +10,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
+
+        public User() {
+
+    }
+//
+//    public User(String username, String email, String password) {
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//    }
+
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
 
     public Long getId() {
         return id;
@@ -48,16 +65,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User() {
-
-    }
-
-    public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
         this.password = password;
     }
 
