@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import com.codeup.springblog.services.Post;
 import com.codeup.springblog.services.User;
 import org.springframework.stereotype.Controller;
@@ -15,23 +16,16 @@ public class PostController {
 
     private final UserRepository userDao;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    private final EmailService emailService;
+
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/posts")
     public String postsIndex(Model model) {
-
-//        Post newPost = new Post("title1", "body1");
-//        Post newPost2 = new Post("title2", "body2");
-//
-//        ArrayList<Post> postList = new ArrayList<>();
-//        postList.add(newPost);
-//        postList.add(newPost2);
-//
-//        model.addAttribute("postArr", postList);
-
         model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
@@ -59,6 +53,7 @@ public class PostController {
     public String submitPost(@ModelAttribute Post post) {
         User user = userDao.getById(1);
         post.setUser(user);
+        emailService.prepareAndSend(post, "Ad Created", "You have created a new ad on SpringBlog Lister!");
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -75,6 +70,8 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String showEditPost(@ModelAttribute Post post) {
+        User user = userDao.getById(1);
+        post.setUser(user);
         postDao.save(post);
         return "redirect:/posts";
     }
